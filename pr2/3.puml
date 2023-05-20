@@ -1,0 +1,28 @@
+@startuml
+!define DEV_MODE true
+
+skinparam monochrome true
+
+!if DEV_MODE
+  actor Руководитель as User
+!else
+  boundary "Веб-интерфейс" as User
+!endif
+
+database "База данных" as Database
+
+node "Сервер приложений" as AppServer {
+  component "Бизнес-логика" as BusinessLogic
+}
+
+node "Сервер баз данных" as DbServer {
+  component "СУБД" as DbComponent
+}
+
+User --> BusinessLogic: ВыдатьЗадание()
+BusinessLogic --> Database: СоздатьЗадание()
+BusinessLogic --> Database: ПолучитьЗадание()
+BusinessLogic --> DbComponent: ЗаписатьВремя()
+DbComponent --> BusinessLogic: Подтверждение()
+BusinessLogic --> User: Подтверждение()
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+actor User
+rectangle "Система" {
+  usecase "Вариант использования 1" as usecase1
+  usecase "Вариант использования 2" as usecase2
+  usecase "Вариант использования 3" as usecase3
+
+  User --> usecase1
+  User --> usecase2
+  User --> usecase3
+}
+@enduml
